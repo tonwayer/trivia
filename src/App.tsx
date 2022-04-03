@@ -1,8 +1,8 @@
 import { BrowserRouter } from 'react-router-dom'
-import { Layout } from './containers/Layout';
+import { Layout } from './containers/Layout'
 
-import './App.scss';
-import Routes from './routes';
+import './App.scss'
+import Routes from './routes'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Routes />
       </Layout>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App

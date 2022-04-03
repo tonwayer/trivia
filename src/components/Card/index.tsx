@@ -1,5 +1,6 @@
 import { CardHeader } from './CardHeader'
 import { CardBody } from './CardBody'
+import { CardFooter } from './CardFooter'
 
 type Props = {
   children: React.ReactNode
@@ -13,4 +14,4 @@ const Card = (props: Props) => {
   )
 }
 
-export { Card, CardHeader, CardBody }
+export { Card, CardHeader, CardBody, CardFooter }

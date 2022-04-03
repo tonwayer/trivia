@@ -3,7 +3,7 @@ type Props = {
 }
 
 export const CardBody = (props: Props) => {
-  return <div className="text-xl py-12">
+  return <div className="text-xl py-[50px]">
     {props.children}
   </div>
 }
