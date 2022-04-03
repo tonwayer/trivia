@@ -23,7 +23,7 @@ export const Quiz = () => {
       <QuestionBox question={quiz.question} />
     </CardBody>
     <CardFooter>
-      <Link to="/quiz">Next</Link>
+      <Link to="/result">Next</Link>
     </CardFooter>
   </Card>
 }
