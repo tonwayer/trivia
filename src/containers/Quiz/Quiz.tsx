@@ -23,11 +23,11 @@ export const Quiz = () => {
     dispatch(loadQuizzes())
   }, [dispatch])
 
-  const handleNext = () => {
+  const handleNext = (answer: boolean) => {
     if (currentIndex === quizzes.length - 1) {
       navigate('/result')
     }
-    dispatch(submitAnswer(true))
+    dispatch(submitAnswer(answer))
   }
 
   return <Card>
@@ -40,9 +40,17 @@ export const Quiz = () => {
           ? <span>Now Loading...</span>
           : <QuestionBox question={quizzes[currentIndex]?.question} />
       }
+      <div className="mt-2">
+        <span className="mx-2">{currentIndex + 1}</span>
+        of
+        <span className="mx-2">{quizzes.length}</span>
+      </div>
     </CardBody>
     <CardFooter>
-      <button onClick={handleNext}>Next</button>
+      <div className="flex justify-center">
+        <button className="mx-2 border-black border-2 py-2 px-3" onClick={() => handleNext(true)}>True</button>
+        <button className="mx-2 border-black border-2 py-2 px-3" onClick={() => handleNext(false)}>False</button>
+      </div>
     </CardFooter>
   </Card>
 }

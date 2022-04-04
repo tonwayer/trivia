@@ -13,8 +13,12 @@ export const Result = () => {
   return (
     <Card>
       <CardHeader>
-        <p>You scored</p>
-        <p><span>{correctAnswerCount}</span>/<span>{correctness.length}</span></p>
+        <span>You scored</span>
+        <div>
+          <span>{correctAnswerCount}</span>
+          /
+          <span>{correctness.length}</span>
+        </div>
       </CardHeader>
       <CardBody>
         {quizzes.map((quiz, index) =>
