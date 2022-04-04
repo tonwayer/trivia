@@ -30,7 +30,7 @@ export const Result = () => {
         )}
       </CardBody>
       <CardFooter>
-        <Link to="/">Play again?</Link>
+        <Link to="/" className="mx-2 border-black border-2 py-2 px-3">Play again?</Link>
       </CardFooter>
     </Card>
   )

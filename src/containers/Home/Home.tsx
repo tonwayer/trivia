@@ -12,7 +12,7 @@ export const Home = () => {
       <p>Can you score 100%?</p>
     </CardBody>
     <CardFooter>
-      <Link to="/questions/0">BEGIN</Link>
+      <Link to="/questions/0" className="mx-2 border-black border-2 py-2 px-3">BEGIN</Link>
     </CardFooter>
   </Card>
 }

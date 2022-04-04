@@ -9,9 +9,7 @@ export const AnswerItem = (props: Props) => {
       <div className="flex-none w-6 h-6">
         <span>{props.isCorrect ? '+' : '-'}</span>
       </div>
-      <p>
-        {props.question}
-      </p>
+      <p dangerouslySetInnerHTML={{ __html: props.question }}></p>
     </div>
   )
 }
