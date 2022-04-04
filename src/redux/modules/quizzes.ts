@@ -9,6 +9,7 @@ export interface QuizState {
   isLoading: boolean
   currentIndex: number
   answers: boolean[]
+  error: any
 }
 
 const initialState: QuizState = {
@@ -16,6 +17,7 @@ const initialState: QuizState = {
   isLoading: false,
   currentIndex: 0,
   answers: [],
+  error: null
 }
 
 export const loadQuizzes = createAsyncThunk(
@@ -42,11 +44,14 @@ export const quizSlice = createSlice({
     builder.addCase(loadQuizzes.pending, (state) => {
       state.isLoading = true
       state.quizzes = []
+      state.error = null
     }).addCase(loadQuizzes.fulfilled, (state, action) => {
       state.quizzes = action.payload.results
+      state.error = null
       state.isLoading = false
-    }).addCase(loadQuizzes.rejected, (state) => {
+    }).addCase(loadQuizzes.rejected, (state, action) => {
       state.isLoading = false
+      state.error = action.payload
     })
   }
 })
@@ -67,6 +72,11 @@ export const selectCurrentIndex = createSelector(
 export const selectIsLoading = createSelector(
   selectQuiz,
   (state) => state.isLoading
+)
+
+export const selectError = createSelector(
+  selectQuiz,
+  (state) => state.error
 )
 
 export const getResult = createSelector(
