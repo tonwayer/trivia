@@ -21,4 +21,4 @@ interface LoadQuestionsResponse {
   results: Question[];
 }
 
-export const getQuestions = () => axiosInstance.get<LoadQuestionsResponse>('/')
+export const getQuestions = () => axiosInstance.get<LoadQuestionsResponse>('')
