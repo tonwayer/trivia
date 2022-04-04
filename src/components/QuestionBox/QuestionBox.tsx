@@ -1,5 +1,5 @@
 type Props = {
-  question: String,
+  question: string,
 }
 
 export const QuestionBox = (props: Props) => {

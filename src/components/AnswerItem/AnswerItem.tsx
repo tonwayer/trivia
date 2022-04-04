@@ -1,6 +1,6 @@
 type Props = {
-  isCorrect: Boolean,
-  question: String,
+  isCorrect: boolean,
+  question: string,
 }
 
 export const AnswerItem = (props: Props) => {
