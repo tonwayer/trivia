@@ -5,28 +5,32 @@ import { Card, CardBody, CardHeader, CardFooter } from "../../components/Card"
 import { QuestionBox } from "../../components/QuestionBox"
 import { useAppDispatch, useAppSelector } from '../../redux/hook'
 import {
-  loadQuizzes,
+  loadQuestions,
   selectCurrentIndex,
   selectError,
   selectIsLoading,
-  selectQuizzes,
+  selectQuestions,
   submitAnswer
-} from '../../redux/modules/quizzes'
+} from '../../redux/modules/questions'
 
-export const Quiz = () => {
+export const Question = () => {
   const dispatch = useAppDispatch()
-  const quizzes = useAppSelector(selectQuizzes)
+  const questions = useAppSelector(selectQuestions)
   const currentIndex = useAppSelector(selectCurrentIndex)
   const isLoading = useAppSelector(selectIsLoading)
   const navigate = useNavigate()
   const error = useAppSelector(selectError)
 
   useEffect(() => {
-    dispatch(loadQuizzes())
+    dispatch(loadQuestions())
   }, [dispatch])
 
+  useEffect(() => {
+    navigate(`/questions/${currentIndex}`)
+  }, [currentIndex])
+
   const handleNext = (answer: boolean) => {
-    if (currentIndex === quizzes.length - 1) {
+    if (currentIndex === questions.length - 1) {
       navigate('/result')
     }
     dispatch(submitAnswer(answer))
@@ -34,7 +38,7 @@ export const Quiz = () => {
 
   return <Card>
     <CardHeader>
-      <h2>{quizzes[currentIndex]?.category}</h2>
+      <h2>{questions[currentIndex]?.category}</h2>
     </CardHeader>
     {isLoading
       ? <div className="py-24">
@@ -45,11 +49,11 @@ export const Quiz = () => {
           {
             error === null
               ? <>
-                <QuestionBox question={quizzes[currentIndex]?.question} />
+                <QuestionBox question={questions[currentIndex]?.question} />
                 <div className="mt-2">
                   <span className="mx-2">{currentIndex + 1}</span>
                   of
-                  <span className="mx-2">{quizzes.length}</span>
+                  <span className="mx-2">{questions.length}</span>
                 </div>
               </>
               : <p>Oops, something went wrong.</p>
@@ -70,6 +74,5 @@ export const Quiz = () => {
         </CardFooter>
       </>
     }
-
   </Card>
 }

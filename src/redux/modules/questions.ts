@@ -1,92 +1,92 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 
-import { getQuizzes } from '../../services/api'
+import { getQuestions } from '../../services/api'
 import { RootState } from '../store'
 import { Question } from '../../types'
 
-export interface QuizState {
-  quizzes: Question[]
+export interface QuestionState {
+  questions: Question[]
   isLoading: boolean
   currentIndex: number
   answers: boolean[]
   error: any
 }
 
-const initialState: QuizState = {
-  quizzes: [],
+const initialState: QuestionState = {
+  questions: [],
   isLoading: false,
   currentIndex: 0,
   answers: [],
   error: null
 }
 
-export const loadQuizzes = createAsyncThunk(
+export const loadQuestions = createAsyncThunk(
   'questions',
   async () => {
-    const response = await getQuizzes()
+    const response = await getQuestions()
     return response.data
   }
 )
 
-export const quizSlice = createSlice({
-  name: 'quiz',
+export const questionSlice = createSlice({
+  name: 'question',
   initialState,
   reducers: {
     submitAnswer: (state, action) => {
       state.answers[state.currentIndex] = action.payload
       state.currentIndex += 1
 
-      if (state.currentIndex === state.quizzes.length)
+      if (state.currentIndex === state.questions.length)
         state.currentIndex = 0
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(loadQuizzes.pending, (state) => {
+    builder.addCase(loadQuestions.pending, (state) => {
       state.isLoading = true
-      state.quizzes = []
+      state.questions = []
       state.error = null
-    }).addCase(loadQuizzes.fulfilled, (state, action) => {
-      state.quizzes = action.payload.results
+    }).addCase(loadQuestions.fulfilled, (state, action) => {
+      state.questions = action.payload.results
       state.error = null
       state.isLoading = false
-    }).addCase(loadQuizzes.rejected, (state, action) => {
+    }).addCase(loadQuestions.rejected, (state, action) => {
       state.isLoading = false
       state.error = action.payload
     })
   }
 })
 
-const selectQuiz = (state: RootState) => state.quiz;
+const selectQuestion = (state: RootState) => state.question;
 
 
-export const selectQuizzes = createSelector(
-  selectQuiz,
-  (state) => state.quizzes
+export const selectQuestions = createSelector(
+  selectQuestion,
+  (state) => state.questions
 )
 
 export const selectCurrentIndex = createSelector(
-  selectQuiz,
+  selectQuestion,
   (state) => state.currentIndex
 )
 
 export const selectIsLoading = createSelector(
-  selectQuiz,
+  selectQuestion,
   (state) => state.isLoading
 )
 
 export const selectError = createSelector(
-  selectQuiz,
+  selectQuestion,
   (state) => state.error
 )
 
 export const getResult = createSelector(
-  selectQuiz,
+  selectQuestion,
   (state) => {
-    const { quizzes, answers } = state
+    const { questions, answers } = state
     let correctAnswerCount = 0
     let incorrectAnswerCount = 0
-    const correctness = quizzes.map((quiz, index) => {
-      const correct_answer = quiz['correct_answer'] === "True" ? true : false
+    const correctness = questions.map((question, index) => {
+      const correct_answer = question['correct_answer'] === "True" ? true : false
       if (correct_answer === answers[index]) {
 
         correctAnswerCount++
@@ -105,6 +105,6 @@ export const getResult = createSelector(
   }
 )
 
-export const { submitAnswer } = quizSlice.actions
+export const { submitAnswer } = questionSlice.actions
 
-export default quizSlice.reducer
+export default questionSlice.reducer

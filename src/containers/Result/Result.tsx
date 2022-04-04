@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 import { AnswerItem } from "../../components/AnswerItem"
 import { Card, CardBody, CardFooter, CardHeader } from "../../components/Card"
 import { useAppSelector } from "../../redux/hook"
-import { getResult, selectQuizzes } from "../../redux/modules/quizzes"
+import { getResult, selectQuestions } from "../../redux/modules/questions"
 
 export const Result = () => {
 
   const { correctAnswerCount, correctness } = useAppSelector(getResult)
-  const quizzes = useAppSelector(selectQuizzes)
+  const questions = useAppSelector(selectQuestions)
 
   return (
     <Card>
@@ -21,11 +21,11 @@ export const Result = () => {
         </div>
       </CardHeader>
       <CardBody>
-        {quizzes.map((quiz, index) =>
+        {questions.map((question, index) =>
           <AnswerItem
             key={index}
             isCorrect={correctness[index]}
-            question={quiz['question']}
+            question={question['question']}
           />
         )}
       </CardBody>

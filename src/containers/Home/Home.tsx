@@ -12,7 +12,7 @@ export const Home = () => {
       <p>Can you score 100%?</p>
     </CardBody>
     <CardFooter>
-      <Link to="/quiz">BEGIN</Link>
+      <Link to="/questions/0">BEGIN</Link>
     </CardFooter>
   </Card>
 }
