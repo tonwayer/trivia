@@ -1,16 +1,21 @@
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+
+import { store } from './redux/store'
 import { Layout } from './containers/Layout'
+import Routes from './routes'
 
 import './App.scss'
-import Routes from './routes'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes />
-      </Layout>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Layout>
+          <Routes />
+        </Layout>
+      </BrowserRouter>
+    </Provider>
   )
 }
 

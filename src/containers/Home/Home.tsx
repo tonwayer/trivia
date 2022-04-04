@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Card, CardHeader, CardBody, CardFooter } from '../../components/Card'
 
-export const Home = () => (
-  <Card>
+export const Home = () => {
+
+  return <Card>
     <CardHeader>
       <h2>Welcome to the trivia Challenge</h2>
     </CardHeader>
@@ -14,4 +15,4 @@ export const Home = () => (
       <Link to="/quiz">BEGIN</Link>
     </CardFooter>
   </Card>
-)
+}
