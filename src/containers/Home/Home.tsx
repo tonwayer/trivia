@@ -5,7 +5,7 @@ export const Home = () => {
 
   return <Card>
     <CardHeader>
-      <h2>Welcome to the trivia Challenge</h2>
+      <h2>Welcome to the Trivia Challenge!</h2>
     </CardHeader>
     <CardBody>
       <p className="mb-36">You will be presented with 10 True or False questions.</p>

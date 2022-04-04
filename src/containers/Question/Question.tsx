@@ -68,7 +68,7 @@ export const Question = () => {
                   <button className="mx-2 border-black border-2 py-2 px-3" onClick={() => handleNext(true)}>True</button>
                   <button className="mx-2 border-black border-2 py-2 px-3" onClick={() => handleNext(false)}>False</button>
                 </>
-                : <Link to="/">Go To Home</Link>
+                : <Link to="/">Go Back</Link>
             }
           </div>
         </CardFooter>

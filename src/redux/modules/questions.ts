@@ -12,7 +12,7 @@ export interface QuestionState {
   error: any
 }
 
-const initialState: QuestionState = {
+export const initialState: QuestionState = {
   questions: [],
   isLoading: false,
   currentIndex: 0,
