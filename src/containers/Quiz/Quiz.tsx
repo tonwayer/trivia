@@ -1,29 +1,48 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Card, CardBody, CardHeader, CardFooter } from "../../components/Card"
 import { QuestionBox } from "../../components/QuestionBox"
-
-const quiz = {
-  "category": "Entertainment: Video Games",
-  "type": "boolean",
-  "difficulty": "hard",
-  "question": "Unturned originally started as a Roblox game.",
-  "correct_answer": "True",
-  "incorrect_answers": [
-    "False"
-  ]
-}
+import { useAppDispatch, useAppSelector } from '../../redux/hook'
+import {
+  loadQuizzes,
+  selectCurrentIndex,
+  selectIsLoading,
+  selectQuizzes,
+  submitAnswer
+} from '../../redux/modules/quizzes'
 
 export const Quiz = () => {
+  const dispatch = useAppDispatch()
+  const quizzes = useAppSelector(selectQuizzes)
+  const currentIndex = useAppSelector(selectCurrentIndex)
+  const isLoading = useAppSelector(selectIsLoading)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(loadQuizzes())
+  }, [dispatch])
+
+  const handleNext = () => {
+    if (currentIndex === quizzes.length - 1) {
+      navigate('/result')
+    }
+    dispatch(submitAnswer(true))
+  }
+
   return <Card>
     <CardHeader>
-      <h2>{quiz.category}</h2>
+      <h2>{quizzes[currentIndex]?.category}</h2>
     </CardHeader>
     <CardBody>
-      <QuestionBox question={quiz.question} />
+      {
+        isLoading
+          ? <span>Now Loading...</span>
+          : <QuestionBox question={quizzes[currentIndex]?.question} />
+      }
     </CardBody>
     <CardFooter>
-      <Link to="/result">Next</Link>
+      <button onClick={handleNext}>Next</button>
     </CardFooter>
   </Card>
 }
